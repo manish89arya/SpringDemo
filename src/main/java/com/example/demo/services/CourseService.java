@@ -10,4 +10,5 @@ public interface CourseService {
 
     public Course getACourse(long courseId);
     public Course setACourse(Course course);
+    public void updateACourse(Course course, long courseId);
 }

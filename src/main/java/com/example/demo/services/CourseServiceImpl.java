@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -41,6 +42,17 @@ public class CourseServiceImpl implements CourseService{
     public Course setACourse(Course course) {
          list.add(course);
          return course;
+    }
+
+    @Override
+    public void updateACourse(Course newcourse, long courseId) {
+        list = list.stream().map(course -> {
+            if(course.getId()==courseId)
+            {
+                course.setCourse_name(newcourse.getCourse_name());
+            }
+        return course;
+        }).collect(Collectors.toList());
     }
 
 }

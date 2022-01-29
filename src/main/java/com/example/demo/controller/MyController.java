@@ -11,7 +11,7 @@ import java.util.List;
 public class MyController {
 
     @Autowired
-    private CourseService course;
+    private CourseService courseService;
 
     @GetMapping("/home")
     public String getMessage(){
@@ -20,18 +20,22 @@ public class MyController {
 
     @GetMapping("/courses")
     public List<Course> getAllCourses(){
-        return course.getCourses();
+        return courseService.getCourses();
     }
 
     @GetMapping("/courses/{course_id}")
     public Course getCourse(@PathVariable String course_id){
-        return course.getACourse(Long.parseLong(course_id));
+        return courseService.getACourse(Long.parseLong(course_id));
     }
 
     @PostMapping("/courses")
     public Course postCourse(@RequestBody Course course){
-        return this.course.setACourse(course);
+        return this.courseService.setACourse(course);
     }
 
+    @PutMapping("/courses/{courseId}")
+    public void updateCourse(@RequestBody Course newcourse,@PathVariable String courseId){
+         this.courseService.updateACourse(newcourse, Integer.parseInt(courseId));
+    }
 
 }
